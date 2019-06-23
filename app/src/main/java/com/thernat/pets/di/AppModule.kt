@@ -41,7 +41,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideBasicVoDao(db: MVVMDatabase): PetDao {
+    fun providePetDao(db: MVVMDatabase): PetDao {
         return db.petDao()
     }
 

@@ -15,6 +15,7 @@ import com.thernat.pets.R
 import com.thernat.pets.di.Injectable
 import javax.inject.Inject
 import com.thernat.pets.databinding.FragmentMasterBinding
+import com.thernat.pets.ui.master.adapter.PetsAdapter
 
 /**
  * Created by m.rafalski on 07/06/2019.
@@ -26,7 +27,6 @@ class MasterFragment: Fragment(), Injectable {
 
     lateinit var masterViewModel: MasterViewModel
 
-
     private lateinit var binding : FragmentMasterBinding
 
     override fun onCreateView(
@@ -35,6 +35,7 @@ class MasterFragment: Fragment(), Injectable {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_master, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.rvPets.adapter = PetsAdapter(requireContext(), arrayListOf())
         return binding.root
     }
 
@@ -51,6 +52,7 @@ class MasterFragment: Fragment(), Injectable {
             setEmptyEventObserver(loadingCompleteCommand){ binding.isLoading = false}
         }
         masterViewModel.start()
+
     }
 
     fun navController() = findNavController()
