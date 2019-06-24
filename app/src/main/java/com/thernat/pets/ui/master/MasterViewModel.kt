@@ -16,7 +16,7 @@ import javax.inject.Inject
  */
 class MasterViewModel @Inject constructor(private val repository: MVVMRepository) : ViewModel() {
 
-    private var basicJob : Job? = null
+    private var getPetsJob : Job? = null
 
     private val _loadingStartedCommand = MutableLiveData<Event<Unit>>()
     val loadingStartedCommand: LiveData<Event<Unit>>
@@ -32,7 +32,7 @@ class MasterViewModel @Inject constructor(private val repository: MVVMRepository
 
     fun start(){
         _loadingStartedCommand.value = Event(Unit)
-        basicJob = CoroutineScope(Dispatchers.IO).launch {
+        getPetsJob = CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val pets = repository.getPets()
                     withContext(Dispatchers.Main) {
@@ -49,6 +49,6 @@ class MasterViewModel @Inject constructor(private val repository: MVVMRepository
     }
 
     override fun onCleared() {
-        basicJob?.cancel()
+        getPetsJob?.cancel()
     }
 }

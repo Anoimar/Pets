@@ -23,6 +23,15 @@
         android:name="com.thernat.pets.ui.master.MasterFragment"
         android:label="MasterFragment" >
 
+        <action android:id="@+id/action_master_fragment_to_add_pet_fragment"
+                app:destination="@id/add_pet_fragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_pet_fragment"
+        android:name="com.thernat.pets.ui.add.AddPetFragment"
+        android:label="AddPetFragment">
     </fragment>
 
 </navigation>

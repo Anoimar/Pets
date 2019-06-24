@@ -5,22 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.thernat.pets.Event
 import com.thernat.pets.R
-import com.thernat.pets.di.Injectable
 import javax.inject.Inject
 import com.thernat.pets.databinding.FragmentMasterBinding
+import com.thernat.pets.ui.AbstractPetFragment
 import com.thernat.pets.ui.master.adapter.PetsAdapter
 
 /**
  * Created by m.rafalski on 07/06/2019.
  */
-class MasterFragment: Fragment(), Injectable {
+class MasterFragment: AbstractPetFragment()  {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -36,6 +31,7 @@ class MasterFragment: Fragment(), Injectable {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_master, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.rvPets.adapter = PetsAdapter(requireContext(), arrayListOf())
+        binding.fabGoToAddPet.setOnClickListener{navController().navigate(R.id.action_master_fragment_to_add_pet_fragment)}
         return binding.root
     }
 
@@ -54,15 +50,4 @@ class MasterFragment: Fragment(), Injectable {
         masterViewModel.start()
 
     }
-
-    fun navController() = findNavController()
-
-
-    //Helper function used to observe events from view model
-    private fun setEmptyEventObserver(liveData: LiveData<Event<Unit>>, action: () -> Unit) {
-        liveData.observe(viewLifecycleOwner, Observer { event ->
-            event.getContentIfNotHandled()?.let { action()}
-        })
-    }
-
 }
