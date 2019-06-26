@@ -3,6 +3,7 @@ package com.thernat.pets.repository
 import com.thernat.pets.api.ApiService
 import com.thernat.pets.db.PetDao
 import com.thernat.pets.exceptions.BasicException
+import com.thernat.pets.vo.AddPetRequest
 import com.thernat.pets.vo.Pet
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,14 +19,29 @@ class MVVMRepository @Inject constructor(private val apiService: ApiService,priv
     private var isCacheDirty = false
 
     suspend fun getPets(): List<Pet> {
-        if(!cachedPetsList.isNullOrEmpty()){
-            return cachedPetsList
-        }
-        val petsFromDatabase = useDataFromDatabase()
-        if(petsFromDatabase.isNotEmpty()){
-            return petsFromDatabase
+        if(!isCacheDirty){
+            if(!cachedPetsList.isNullOrEmpty()){
+                return cachedPetsList
+            }
+            val petsFromDatabase = useDataFromDatabase()
+            if(petsFromDatabase.isNotEmpty()){
+                return petsFromDatabase
+            }
         }
         return useDataFromRemote()
+    }
+
+    suspend fun addPet(addPet: AddPetRequest){
+        try {
+        if (apiService.addPet(addPet).isSuccessful){
+            isCacheDirty = true
+            return
+        }
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+        throw BasicException()
+
     }
 
     private fun useDataFromDatabase(): List<Pet> {
@@ -44,6 +60,7 @@ class MVVMRepository @Inject constructor(private val apiService: ApiService,priv
                 response.body()?.let {pets ->
                     cachedPetsList = pets
                     pets.forEach { petDao.insert(it) }
+                    isCacheDirty = false
                     return pets
                 }
             }

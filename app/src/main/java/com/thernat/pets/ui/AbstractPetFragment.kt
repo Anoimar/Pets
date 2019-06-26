@@ -20,4 +20,6 @@ abstract class AbstractPetFragment: Fragment(), Injectable {
             event.getContentIfNotHandled()?.let { action()}
         })
     }
+
+
 }

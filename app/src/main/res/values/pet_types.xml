@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pet_types_list">
+        <item>Cat</item>
+        <item>Dog</item>
+        <item>Mouse</item>
+        <item>Bear</item>
+        <item>Hamster</item>
+        <item>Dragon</item>
+        <item>Goldfish</item>
+        <item>Snake</item>
+        <item>Other</item>
+    </array>
+</resources>

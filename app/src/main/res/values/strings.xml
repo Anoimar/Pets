@@ -3,4 +3,13 @@
     <string name="label_owner">Owner:</string>
     <string name="label_type">Pet type:</string>
     <string name="label_age">Age:</string>
+    <string name="hint_pet_name">Pet\'s name</string>
+    <string name="hint_pet_age">Pet\'s age</string>
+    <string name="hint_pet_owner">Owner</string>
+    <string name="add_pet">Add pet</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="dialog_new_pet_added">New Pet added</string>
+    <string name="dialog_new_pet_not_added">Failed to add new pet</string>
+    <string name="dialog_input_data_wrong">Some fields were not filled correctly</string>
 </resources>

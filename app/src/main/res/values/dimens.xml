@@ -18,5 +18,7 @@
     <dimen name="material_design_smallest_padding">8dp</dimen>
     <dimen name="material_design_small_padding">12dp</dimen>
     <dimen name="material_design_medium_padding">16dp</dimen>
+    <dimen name="material_design_medium_large_padding_size">24dp</dimen>
+
 
 </resources>

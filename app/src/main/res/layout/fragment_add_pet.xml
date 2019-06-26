@@ -7,6 +7,10 @@
                 name="viewmodel"
                 type="com.thernat.pets.ui.add.AddPetViewModel"/>
 
+        <variable
+                name="isLoading"
+                type="boolean" />
+
     </data>
 
 
@@ -18,6 +22,79 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <EditText
+                android:id="@+id/input_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/material_design_small_margin_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@={viewmodel.nameLiveData}"
+                android:hint="@string/hint_pet_name"
+        />
 
+        <EditText
+                android:id="@+id/input_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/material_design_small_margin_size"
+                app:layout_constraintTop_toBottomOf="@+id/input_name"
+                app:layout_constraintStart_toStartOf="@id/input_name"
+                android:inputType="number"
+                android:text="@={viewmodel.ageLiveData}"
+                android:hint="@string/hint_pet_age"
+        />
+
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:visibleGone="@{isLoading}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <Spinner
+                android:id="@+id/spinner_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/material_design_small_margin_size"
+                app:layout_constraintTop_toBottomOf="@+id/input_age"
+                app:layout_constraintStart_toStartOf="@id/input_name"
+                android:entries="@array/pet_types_list"
+                app:selectedValue="@={viewmodel.typeLiveData}"
+        >
+
+        </Spinner>
+
+        <EditText
+                android:id="@+id/input_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/material_design_small_margin_size"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_type"
+                app:layout_constraintStart_toStartOf="@id/input_name"
+                android:text="@={viewmodel.ownerLiveData}"
+                android:hint="@string/hint_pet_owner"
+        />
+
+        <Button
+                android:id="@+id/button_add"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/material_design_small_margin_size"
+                android:layout_marginStart="@dimen/material_design_small_margin_size"
+                app:layout_constraintTop_toBottomOf="@id/input_owner"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingTop="@dimen/material_design_medium_margin_size"
+                android:paddingBottom="@dimen/material_design_medium_margin_size"
+                android:textColor="@color/colorWhite"
+                android:backgroundTint="@color/colorAccent"
+                android:text="@string/add_pet"
+        />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
