@@ -11,6 +11,7 @@ import javax.inject.Inject
 import com.thernat.pets.databinding.FragmentMasterBinding
 import com.thernat.pets.ui.AbstractPetFragment
 import com.thernat.pets.ui.master.adapter.PetsAdapter
+import com.thernat.pets.utils.image.ImageUrlProvider
 
 /**
  * Created by m.rafalski on 07/06/2019.
@@ -30,7 +31,7 @@ class MasterFragment: AbstractPetFragment()  {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_master, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.rvPets.adapter = PetsAdapter(requireContext(), arrayListOf())
+        binding.rvPets.adapter = PetsAdapter(requireContext(), arrayListOf(), ImageUrlProvider())
         binding.fabGoToAddPet.setOnClickListener{navController().navigate(R.id.action_master_fragment_to_add_pet_fragment)}
         return binding.root
     }

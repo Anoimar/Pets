@@ -14,4 +14,7 @@ interface PetDao {
 
     @Query("SELECT * FROM pet")
     fun getPets(): List<Pet>
+
+    @Query("DELETE FROM pet")
+    fun removeAllPets()
 }

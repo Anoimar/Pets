@@ -4,13 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.thernat.pets.GlideApp
 import com.thernat.pets.vo.Pet
 import com.thernat.pets.databinding.ItemPetBinding
+import com.thernat.pets.utils.image.ImageUrlProvider
 
 /**
  * Created by m.rafalski on 24/06/2019.
  */
-class PetsAdapter (private var context: Context, private var pets: List<Pet>):
+class PetsAdapter (private var context: Context, private var pets: List<Pet>,private val imageUrlProvider: ImageUrlProvider):
     RecyclerView.Adapter<PetsAdapter.ViewHolder>() {
 
 
@@ -29,9 +31,9 @@ class PetsAdapter (private var context: Context, private var pets: List<Pet>):
             with(binding){
                 pet = model
                 executePendingBindings()
-//                GlideApp.with(context)
-//                    .load(ImageUrlCreator().createProductImageUrl(viewModel.imageUrl))
-//                    .into(binding.imageProduct)
+               GlideApp.with(context)
+                   .load(imageUrlProvider.getPetTypeImage(model.type))
+                  .into(binding.imagePetPicture)
             }
         }
     }

@@ -29,6 +29,7 @@
                 android:layout_marginStart="@dimen/material_design_small_margin_size"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:list="@{viewmodel.pet}"
+                app:visibleGone="@{!isLoading}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
 

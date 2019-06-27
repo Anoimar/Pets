@@ -59,6 +59,7 @@ class MVVMRepository @Inject constructor(private val apiService: ApiService,priv
             if(response.isSuccessful){
                 response.body()?.let {pets ->
                     cachedPetsList = pets
+                    petDao.removeAllPets()
                     pets.forEach { petDao.insert(it) }
                     isCacheDirty = false
                     return pets
